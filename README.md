@@ -4,7 +4,10 @@ TODO
 - cleanup code
 
 # Steps to run the project:
-- clone project from github
+- Clone project from github.
+- Type `sbt run` in project folder. This will run the server
+- Go to "http://localhost:9000/" in a browser.
+- Type in urls, and have fun!
 
 
 
