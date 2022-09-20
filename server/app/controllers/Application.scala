@@ -51,10 +51,14 @@ class Application @Inject()(cc: ControllerComponents, implicit val ec: Execution
           val matchIconTag = regExLink findFirstMatchIn response.body
           val iconTag = matchIconTag.map(_.group(0)).getOrElse(" no icon found on page")
           val matchIcon = regExIcon findFirstMatchIn iconTag          
-          val icon = matchIcon.map(_.group(1)).getOrElse(" no icon url found in icon tag")          
+          val icon = matchIcon.map(_.group(1)).getOrElse(" no icon url found in icon tag")   
+          val iconURLFixer = {
+            if (icon.contains("http")) icon
+            else site + icon
+          }       
           Ok(Json.parse(s"""{
               "name": "$title",
-              "icon": "$site$icon"
+              "icon": "$iconURLFixer"
               }"""
           ) )
         }
